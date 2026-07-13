@@ -13,6 +13,6 @@ public class HomeController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hello Azure DevOps 🚀";
+        return "Hello Azure DevOps 🚀 CI";
     }
 }
