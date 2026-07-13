@@ -1,13 +1,14 @@
 package employee_service;
 
+import employeeservice.EmployeeServiceApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = EmployeeServiceApplication.class)
 class EmployeeServiceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
