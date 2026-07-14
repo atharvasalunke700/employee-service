@@ -30,6 +30,11 @@ public class HomeController {
                    style="font-size:22px;text-decoration:none;">
                     ▶ Open YouTube
                 </a>
+                <a href="https://www.google.com/" target="_blank"
+                   style="font-size:22px;text-decoration:none;">
+                    ▶ Google
+                </a>
+
 
             </body>
             </html>
