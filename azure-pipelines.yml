@@ -9,14 +9,32 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  azureSubscription: 'Azure-Service-Connection'
+  webAppName: 'employee-service-atharva'
+  artifactName: 'drop'
+
 steps:
-- task: Maven@3
+
+# Build the Spring Boot application
+- task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.21'
-    jdkArchitectureOption: 'x64'
+    goals: 'clean package'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean package'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.21'
+
+# Publish the JAR as a pipeline artifact
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/target'
+    artifact: '$(artifactName)'
+
+# Deploy the JAR to Azure App Service
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: '$(azureSubscription)'
+    appName: '$(webAppName)'
+    package: '$(System.DefaultWorkingDirectory)/target/*.jar'
